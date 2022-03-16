@@ -14,11 +14,14 @@ let currentplayer = player1
 
 
 const playturn = (e) => {
+    if (e.currentTarget.textContent === "x" | "o") {
+        return;
+    } {
         i = e.currentTarget.id
         gameArray.splice(i, 1, currentplayer.marker)
         render(i)
         currentplayer === player1 ? currentplayer = player2 : currentplayer = player1;
-}
+}}
 const render = (i) => {
     let cell = document.getElementById(i)
     cell.textContent = gameArray[i]
