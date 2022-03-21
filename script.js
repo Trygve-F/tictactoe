@@ -14,19 +14,39 @@ let currentplayer = player1
 
 
 const playturn = (e) => {
-    if (e.currentTarget.textContent === "x" | "o") {
+    if (e.currentTarget.textContent === "x" || e.currentTarget.textContent === "o") {
         return;
     } {
         i = e.currentTarget.id
         gameArray.splice(i, 1, currentplayer.marker)
         render(i)
+        checkWin(currentplayer.marker)
         currentplayer === player1 ? currentplayer = player2 : currentplayer = player1;
 }}
+
+const checkWin = () => {
+    if  (gameArray[0] === currentplayer.marker && gameArray[1] === currentplayer.marker && gameArray[2] === currentplayer.marker
+        || gameArray[3] === currentplayer.marker && gameArray[4] === currentplayer.marker && gameArray[5] === currentplayer.marker
+        || gameArray[6] === currentplayer.marker && gameArray[7] === currentplayer.marker && gameArray[8] === currentplayer.marker
+        || gameArray[0] === currentplayer.marker && gameArray[3] === currentplayer.marker && gameArray[6] === currentplayer.marker
+        || gameArray[1] === currentplayer.marker && gameArray[4] === currentplayer.marker && gameArray[7] === currentplayer.marker
+        || gameArray[2] === currentplayer.marker && gameArray[5] === currentplayer.marker && gameArray[8] === currentplayer.marker
+        || gameArray[0] === currentplayer.marker && gameArray[4] === currentplayer.marker && gameArray[8] === currentplayer.marker
+        || gameArray[2] === currentplayer.marker && gameArray[4] === currentplayer.marker && gameArray[6] === currentplayer.marker)
+        alert(currentplayer.marker + " wins")
+
+        else if (gameArray.includes("") === false)
+    alert("tie!")
+    else
+        return
+
+}
+
 const render = (i) => {
     let cell = document.getElementById(i)
     cell.textContent = gameArray[i]
 }
-return {playturn}
+return {playturn, checkWin}
 })();
 
 //GAMEBOARD MODULE
@@ -40,6 +60,7 @@ const gameArray = (() => {
         const gameCell = document.createElement('div');
         gameCell.textContent = e;
         gameCell.id = i;
+        gameCell.value = e
         gameCell.className = "gameCell";
         gameCell.addEventListener('click', gameController.playturn)
         gameContainer.appendChild(gameCell);
